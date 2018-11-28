@@ -5,4 +5,7 @@ class ParkingSpot < ApplicationRecord
 
   validates :spot_number, :size, presence: true, numericality: { only_integer: true }
   validates :size, inclusion: { in: SIZES }
+
+  scope :by_size,   -> (size) { where(size: size) }
+  scope :available, -> { where(taken: false) }
 end
